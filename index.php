@@ -48,6 +48,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 // Save the score to the database
     $stmt = $pdo->prepare("INSERT INTO scores (username, score) VALUES (?, ?)");
     $stmt->execute([$username, $score]);
+
+// Display the score
+echo "<h2>Your Score: $score/" . count($questions) . "</h2>";
+echo '<a href="index.php">Try Again</a>';
+
+// Display the leaderboard
+echo "<h3>Leaderboard (Top 10)</h3>";
+$stmt = $pdo->query("SELECT username, score, submitted_at FROM scores ORDER BY score DESC, submitted_at ASC LIMIT 10");
+$leaderboard = $stmt->fetchAll();
+
+echo "<ol>";
+foreach ($leaderboard as $entry) {
+    echo "<li>{$entry['username']} - {$entry['score']} (Submitted at: {$entry['submitted_at']})</li>";
+}
+echo "</ol>";
+exit;
 }
 ?>
 
