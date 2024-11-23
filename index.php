@@ -50,20 +50,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute([$username, $score]);
 
 // Display the score
-echo "<h2>Your Score: $score/" . count($questions) . "</h2>";
-echo '<a href="index.php">Try Again</a>';
+    echo "<h2>Your Score: $score/" . count($questions) . "</h2>";
+    echo '<a href="index.php">Try Again</a>';
 
 // Display the leaderboard
-echo "<h3>Leaderboard (Top 10)</h3>";
-$stmt = $pdo->query("SELECT username, score, submitted_at FROM scores ORDER BY score DESC, submitted_at ASC LIMIT 10");
-$leaderboard = $stmt->fetchAll();
+    echo "<h3>Leaderboard (Top 10)</h3>";
+    $stmt = $pdo->query("SELECT username, score, submitted_at FROM scores ORDER BY score DESC, submitted_at ASC LIMIT 10");
+    $leaderboard = $stmt->fetchAll();
 
-echo "<ol>";
-foreach ($leaderboard as $entry) {
-    echo "<li>{$entry['username']} - {$entry['score']} (Submitted at: {$entry['submitted_at']})</li>";
-}
-echo "</ol>";
-exit;
+    echo "<ol>";
+    foreach ($leaderboard as $entry) {
+        echo "<li>{$entry['username']} - {$entry['score']} (Submitted at: {$entry['submitted_at']})</li>";
+    }
+    echo "</ol>";
+    exit;
 }
 ?>
 
@@ -74,12 +74,12 @@ exit;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP Quiz</title>
     <script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.addEventListener('keydown', event => {
-        if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
-            event.preventDefault();
-        }
-    });
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', event => {
+            if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
+                event.preventDefault();
+            }
+        });
     </script>
 </head>
 <body>
